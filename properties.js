@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <th>Address</th>
                     <th>Neighborhood</th>
                     <th>Square Feet</th>
-                    <th>Parking Garage</th>
-                    <th>Public Transportation</th>
+                  
                 </tr>
             `;
 
