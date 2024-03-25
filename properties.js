@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>${property.neighborhood}</td>
                     <td>${property.squareFeet}</td>
                     
-                    <td>${property.publicTransportation}</td>
+                   
                 `;
                 table.appendChild(row);
             });
