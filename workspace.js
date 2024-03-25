@@ -18,7 +18,7 @@ function displayWorkspaces() {
             workspaceDiv.classList.add('workspace-item'); // Add a class for styling
             let i=1;
             const index = document.createElement('p');
-            index.textContent = `Number: ${i}`;
+            index.textContent = `Number: ${i++}`;
             // Create HTML elements for each workspace property
             const address = document.createElement('p');
             address.textContent = `Address: ${workspace.address}`;
