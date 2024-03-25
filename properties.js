@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     <th>Address</th>
                     <th>Neighborhood</th>
                     <th>Square Feet</th>
-                  
+                   <th>Parking Garage</th>
+                    <th>Public Transportation</th>
                 </tr>
             `;
 
@@ -30,7 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>${property.address}</td>
                     <td>${property.neighborhood}</td>
                     <td>${property.squareFeet}</td>
-                    
+                    <td>${property.parking}</td>
+                    <td>${property.publicTransportation}</td>
                    
                 `;
                 table.appendChild(row);
