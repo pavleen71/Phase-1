@@ -9,6 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     workspacesButton.addEventListener('click', function () {
         
-        window.location.href = 'colistWokspace.html';
+        window.location.href = 'colistwokspace.html';
     });
 });
