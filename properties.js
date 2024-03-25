@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>${property.address}</td>
                     <td>${property.neighborhood}</td>
                     <td>${property.squareFeet}</td>
-                    <td>${property.parkingGarage}</td>
+                    
                     <td>${property.publicTransportation}</td>
                 `;
                 table.appendChild(row);
