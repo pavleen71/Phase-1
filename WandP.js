@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     <th>Availability Date</th>
                     <th>Lease Term</th>
                     <th>Price</th>
+                    <th>Neighbourhood</th>
+                    <th>Square Feet</th>
                 </tr>
             `;
 
@@ -42,6 +44,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>${item.availabilityDate || '-'}</td>
                     <td>${item.leaseTerm || '-'}</td>
                     <td>${item.price || '-'}</td>
+                    <td>${item.neighborhood || '-'}</td>
+                    <td>${item.squareFeet || '-'}</td>
                 `;
                 table.appendChild(row);
             });
