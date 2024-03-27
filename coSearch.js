@@ -1,26 +1,38 @@
-import properties from "./listProper.js"
+import properties from "./listProper.js";
 import workspaces from "./listWorkspace.js";
+
 const storedProperties = JSON.parse(localStorage.getItem('properties')) || [];
-const storedWorkspaces = JSON.parse(localStorage.getItem('workspaces')) || [];
+const storedWorkspaces =  JSON.parse(localStorage.getItem('workspaces')) || [];;
 
 // Function to sort properties or workspaces based on selected criteria
 function sortData(criteria) {
     let sortedData;
 
-    // Check which criteria was selected for sorting
+   
     switch (criteria) {
-        case 'price':
-            // Sort properties or workspaces by price
-            sortedData = storedProperties.concat(storedWorkspaces).sort((a, b) => a.price - b.price);
+        case 'individuals':
+            // Sort by individuals allowed
+            sortedData = [...storedProperties, ...storedWorkspaces].sort((a, b) => a.individuals - b.individuals);
             break;
         case 'area':
-            // Sort properties or workspaces by area (square feet)
-            sortedData = storedProperties.concat(storedWorkspaces).sort((a, b) => a.squareFeet - b.squareFeet);
+            // Sort by area (square feet)
+            sortedData = [...storedProperties, ...storedWorkspaces].sort((a, b) => a.squareFeet - b.squareFeet);
             break;
-        // Add more cases for other sorting criteria as needed
+        case 'availability':
+            // Sort by availability date
+            sortedData = [...storedProperties, ...storedWorkspaces].sort((a, b) => new Date(a.availabilityDate) - new Date(b.availabilityDate));
+            break;
+        case 'leaseTerm':
+            // Sort by lease term
+            sortedData = [...storedProperties, ...storedWorkspaces].sort((a, b) => a.leaseTerm.localeCompare(b.leaseTerm));
+            break;
+        case 'price':
+            // Sort by price
+            sortedData = [...storedProperties, ...storedWorkspaces].sort((a, b) => a.price - b.price);
+            break;
         default:
             // If no valid criteria is selected, return unsorted data
-            sortedData = storedProperties.concat(storedWorkspaces);
+            sortedData = [...storedProperties, ...storedWorkspaces];
             break;
     }
 
@@ -41,34 +53,30 @@ document.addEventListener('DOMContentLoaded', function () {
         const sortedData = sortData(selectedCriteria);
 
         // Display the sorted results in the sortResults div
-       
         displaySortedResults(sortedData);
-       
-       
-        
     });
 
     // Function to display sorted results in the sortResults div
     function displaySortedResults(sortedData) {
         // Clear previous results
-        if(sortedData.length>0){
-           
-           
         sortResults.innerHTML = '';
 
         // Display the sorted data in the sortResults div
         sortedData.forEach(item => {
             const listItem = document.createElement('div');
-            listItem.textContent = `Address: ${item.address}, Price: ${item.price}`;
+            listItem.innerHTML = `<p><strong>Address:</strong> ${item.address}</p>
+            <p><strong>Type:</strong> ${item.type}</p>
+            <p><strong>Individuals Allowed:</strong> ${item.individuals}</p>
+            <p><strong>Smoking Allowed:</strong> ${item.smoking}</p>
+            <p><strong>Availability Date:</strong> ${item.availabilityDate}</p>
+            <p><strong>Lease Term:</strong> ${item.leaseTerm}</p>
+            <p><strong>Price:</strong> ${item.price}</p>
+            <p><strong>Squarefeet:</strong> ${item.squareFeet}</p>`;
             sortResults.appendChild(listItem);
-        
         });
     }
-    else{
-        sortResults.textContent = 'No results found.';
-    }
-    }
 });
+
 document.addEventListener('DOMContentLoaded', function () {
     const searchForm = document.getElementById('searchForm');
     const searchResultsDiv = document.getElementById('searchResults');
@@ -80,16 +88,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const searchBy = document.getElementById('searchBy').value;
         const searchTerm = document.getElementById('searchTerm').value.trim().toLowerCase();
 
-        // Retrieve properties and workspaces from local storage
-        const storedProperties = JSON.parse(localStorage.getItem('properties')) || [];
-        const storedWorkspaces = JSON.parse(localStorage.getItem('workspaces')) || [];
-
         // Perform search in both properties and workspaces arrays
         const searchResults = [...storedProperties, ...storedWorkspaces].filter(item => {
             // Convert the search term and item's property to lowercase for case-insensitive comparison
             const itemValue = item[searchBy].toString().toLowerCase();
             return itemValue.includes(searchTerm);
         });
+
+        // Print the search results array to the console
+        console.log(searchResults);
 
         // Clear previous search results
         searchResultsDiv.innerHTML = '';
@@ -107,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <p><strong>Availability Date:</strong> ${result.availabilityDate}</p>
                     <p><strong>Lease Term:</strong> ${result.leaseTerm}</p>
                     <p><strong>Price:</strong> ${result.price}</p>
+                    <p><strong>Squarefeet:</strong> ${result.squareFeet}</p>
                 `;
                 searchResultsDiv.appendChild(resultDiv);
             });
